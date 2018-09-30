@@ -4,6 +4,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const passport = require('passport');
+const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -15,10 +16,14 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Logging and dotenv setup
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
   app.use(require('morgan')('dev'));
 }
+
+//Mongo connect
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true })
 
 app.use(cookieParser());
 app.use(express.json());
