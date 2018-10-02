@@ -1,4 +1,5 @@
 const winston = require('winston');
+require('express-async-errors');
 
 const customFormat = winston.format.printf(info => {
   return `${info.timestamp} - ${info.level}: ${info.message}`;
