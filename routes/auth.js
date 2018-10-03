@@ -10,7 +10,9 @@ const LocalSignup = passport.authenticate('local-signup', { session: false })
 
 /* POST signup */
 router.post('/signup', JoiValidateMiddleware(signUpSchema), LocalSignup, (req, res) => {
+  const token = req.user.generateAuthToken()
 
+  res.json({ token })
 })
 
 module.exports = router;
