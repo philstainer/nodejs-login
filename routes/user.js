@@ -7,7 +7,7 @@ const jwtAuth = passport.authenticate('jwt', { session: false })
 
 /* GET Secret info. */
 router.get('/secret', jwtAuth, (req, res, next) => {
-  res.send('This route requires a valid JWT Token')
+  res.send('Success')
 });
 
 module.exports = router;
