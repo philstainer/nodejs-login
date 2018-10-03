@@ -8,6 +8,8 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(require('morgan')('dev'));
 }
 
+// Load setup files
+require('./setup/passport')
 require('./setup/logging')()
 require('./setup/routes')(app);
 require('./setup/db')();

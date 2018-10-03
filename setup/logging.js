@@ -15,7 +15,8 @@ module.exports = () => {
       new winston.transports.File({ filename: './logs/combined.log', level: 'info' })
     ],
     exceptionHandlers: [
-      new winston.transports.File({ filename: './logs/exceptions.log' })
+      new winston.transports.File({ filename: './logs/exceptions.log' }),
+      new winston.transports.Console()
     ]
   });
 
