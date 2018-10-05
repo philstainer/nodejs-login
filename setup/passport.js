@@ -1,13 +1,14 @@
 const _ = require('lodash')
 const passport = require('passport');
 const fs = require('fs')
+const path = require('path')
 
 const { Strategy: LocalStrategy } = require('passport-local');
 const { ExtractJwt, Strategy: JWTStrategy } = require('passport-jwt');
 
 const User = require('../models/user')
 
-const publicKey = fs.readFileSync('./jwt-public.key', 'utf8')
+const publicKey = fs.readFileSync(path.resolve(__dirname, '../jwt-public.key'), 'utf8')
 
 passport.use('local-signup', new LocalStrategy({
   usernameField: 'email',
