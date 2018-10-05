@@ -1,8 +1,28 @@
 const User = require('../models/user')
 
 module.exports = {
-  signup: (req, res) => {
+  passportSignup: (req, res) => {
     const token = req.user.generateAuthToken()
+
+    res.json({ token })
+  },
+  signup: async (req, res) => {
+    let foundUser;
+    const { email, password } = req.body;
+
+    try {
+      foundUser = await User.findOne({ email })
+    } catch (err) {
+      return done(err);
+    }
+
+    if (foundUser) return res.status(400).json({ message: 'Email already in use' })
+
+    let newUser = new User({ email })
+    newUser.hashedPassword = newUser.generateHash(password)
+    await newUser.save()
+
+    const token = newUser.generateAuthToken()
 
     res.json({ token })
   },
