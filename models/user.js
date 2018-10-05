@@ -6,7 +6,9 @@ const jwt = require('jsonwebtoken')
 
 const userSchema = mongoose.Schema({
   email: String,
-  hashedPassword: String
+  hashedPassword: String,
+  google_id: String,
+  google_token: String
 })
 
 userSchema.methods.generateHash = password => bcrypt.hashSync(password, bcrypt.genSaltSync(9))

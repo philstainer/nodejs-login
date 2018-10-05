@@ -42,5 +42,10 @@ module.exports = {
     const token = foundUser.generateAuthToken()
 
     res.json({ token })
+  },
+  googleAuth: async (req, res) => {
+    const token = req.user.generateAuthToken()
+
+    res.json({ token })
   }
 }
