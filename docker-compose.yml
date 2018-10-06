@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  back-end-api:
+    container_name: backend
+    restart: always
+    build: .
+    env_file: .env
+    environment:
+      - NODE_ENV=production
+      - MONGO_URL=mongodb://mongodb/nodejs-login
+    ports:
+      - 3000:3000
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - 27017:27017
